@@ -1,0 +1,128 @@
+API transcript generated 2026-11-24 22:11:35 against http://127.0.0.1:8001
+
+### 1. Health check
+GET /health
+-> HTTP 200
+{
+  "status": "ok",
+  "model_loaded": true
+}
+
+### 2. Model info (abridged)
+GET /model-info
+-> HTTP 200
+{
+  "model_name": "xgb_aapl_next_close",
+  "symbol": "AAPL",
+  "target_type": "return",
+  "training_window": [
+    "2014-01-31",
+    "2016-12-30"
+  ],
+  "test_window": [
+    "2017-01-03",
+    "2017-12-29"
+  ],
+  "beats_naive_on_test_rmse": false,
+  "test_metrics": {
+    "MAE": 1.178,
+    "RMSE": 1.754,
+    "R2": 0.986,
+    "MAPE_pct": 0.77,
+    "R2_of_returns": -0.016,
+    "direction_accuracy_pct": 53.785
+  }
+}
+
+### 3. VALID prediction (20 real AAPL trading days up to 27 Dec 2017)
+POST /predict
+request: symbol=AAPL, 20 daily OHLCV records, newest = 2017-12-27
+-> HTTP 200
+{
+  "symbol": "AAPL",
+  "as_of_date": "2017-12-27",
+  "predicted_next_close": 170.81,
+  "predicted_change_pct": 0.125,
+  "baseline_next_close": 170.6,
+  "baseline_description": "repeat the last closing price",
+  "currency": "USD (assumed; the dataset has no currency column)",
+  "model_name": "xgb_aapl_next_close",
+  "model_version": "1.0.0",
+  "target_type": "return",
+  "warnings": [
+    "In testing, this model did not meaningfully improve on repeating the last close."
+  ],
+  "disclaimer": "Historical statistical model for education. Not investment advice; historical patterns do not guarantee future prices."
+}
+
+   actual AAPL close on 2017-12-28: 171.08 | model: 170.81 | baseline (repeat last close): 170.60
+
+### 4. INVALID: wrong stock symbol (MSFT)
+POST /predict
+request: same request as #3 with one thing broken
+-> HTTP 422
+{
+  "error": "Invalid input - no prediction was made",
+  "details": [
+    {
+      "field": "symbol",
+      "problem": "this model was trained for AAPL only, not MSFT"
+    }
+  ]
+}
+
+### 5. INVALID: only 19 days of history
+POST /predict
+request: same request as #3 with one thing broken
+-> HTTP 422
+{
+  "error": "Invalid input - no prediction was made",
+  "details": [
+    {
+      "field": "history",
+      "problem": "List should have at least 20 items after validation, not 19"
+    }
+  ]
+}
+
+### 6. INVALID: high price below low price
+POST /predict
+request: same request as #3 with one thing broken
+-> HTTP 422
+{
+  "error": "Invalid input - no prediction was made",
+  "details": [
+    {
+      "field": "history.5",
+      "problem": "inconsistent prices on 2017-12-06: high must be the highest and low the lowest of open/high/low/close"
+    }
+  ]
+}
+
+### 7. INVALID: negative volume
+POST /predict
+request: same request as #3 with one thing broken
+-> HTTP 422
+{
+  "error": "Invalid input - no prediction was made",
+  "details": [
+    {
+      "field": "history.2.volume",
+      "problem": "Input should be greater than 0"
+    }
+  ]
+}
+
+### 8. INVALID: dates out of order
+POST /predict
+request: same request as #3 with one thing broken
+-> HTTP 422
+{
+  "error": "Invalid input - no prediction was made",
+  "details": [
+    {
+      "field": "history",
+      "problem": "history dates must be strictly increasing (oldest first)"
+    }
+  ]
+}

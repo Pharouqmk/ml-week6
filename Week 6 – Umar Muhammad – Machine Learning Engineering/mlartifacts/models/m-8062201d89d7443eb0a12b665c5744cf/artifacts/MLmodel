@@ -1,0 +1,35 @@
+artifact_path: file:///mnt/user-data/outputs/ml-week6/mlartifacts/models/m-8062201d89d7443eb0a12b665c5744cf/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.12.3
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBRegressor
+    model_format: ubj
+    xgb_version: 3.4.1
+is_signature_from_type_hint: false
+mlflow_version: 3.18.0
+model_id: m-8062201d89d7443eb0a12b665c5744cf
+model_size_bytes: 24836
+model_uuid: m-8062201d89d7443eb0a12b665c5744cf
+prompts: null
+run_id: 4fa25078f0524d9aa21efc807a7aa8ec
+signature:
+  inputs: '[{"type": "double", "name": "prev_return_pct", "required": true}, {"type":
+    "double", "name": "prev_open_gap_pct", "required": true}, {"type": "double", "name":
+    "prev_range_pct", "required": true}, {"type": "double", "name": "close_vs_ma5_pct",
+    "required": true}, {"type": "double", "name": "close_vs_ma10_pct", "required":
+    true}, {"type": "double", "name": "close_vs_ma20_pct", "required": true}, {"type":
+    "double", "name": "volume_vs_avg20", "required": true}, {"type": "double", "name":
+    "ret_2d_pct", "required": true}, {"type": "double", "name": "ret_5d_pct", "required":
+    true}, {"type": "double", "name": "vol_10d_pct", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float32", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-11-23 05:55:39.852776'

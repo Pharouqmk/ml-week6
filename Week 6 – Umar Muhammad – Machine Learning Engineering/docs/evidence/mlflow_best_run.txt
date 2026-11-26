@@ -1,0 +1,26 @@
+MLflow experiment: aapl-next-day-close   |   31 runs tracked   |   MLflow 3.18.0
+
+SELECTED / FINAL RUN: final_selected_train+val  (run_id 4fa25078f0524d9aa21efc807a7aa8ec)
+
+Parameters:
+  target_type            return
+  n_features             10
+  max_depth              4
+  colsample_bytree       0.5
+  reg_lambda             1.0
+  min_child_weight       10
+  learning_rate          0.05
+  subsample              0.9
+  gamma                  0.5
+  n_estimators           19
+  fit_on                 train+validation
+
+Metrics (test year 2017):
+  test_MAPE_pct            0.7705
+  test_R2_of_returns       -0.0165
+  test_MAE                 1.1780
+  test_RMSE                1.7542
+  test_R2                  0.9856
+  test_direction_accuracy_pct 53.7849
+
+Selected from validation run: xgb_return_13

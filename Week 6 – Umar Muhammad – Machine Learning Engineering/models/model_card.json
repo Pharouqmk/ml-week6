@@ -1,0 +1,76 @@
+{
+  "model_name": "xgb_aapl_next_close",
+  "version": "1.0.0",
+  "symbol": "AAPL",
+  "target_type": "return",
+  "features": [
+    "prev_return_pct",
+    "prev_open_gap_pct",
+    "prev_range_pct",
+    "close_vs_ma5_pct",
+    "close_vs_ma10_pct",
+    "close_vs_ma20_pct",
+    "volume_vs_avg20",
+    "ret_2d_pct",
+    "ret_5d_pct",
+    "vol_10d_pct"
+  ],
+  "task": "predict the closing price of the next trading day from the previous 20 trading days (OHLCV)",
+  "currency_note": "prices assumed to be US dollars; the file has no currency column",
+  "params": {
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "min_child_weight": 10,
+    "subsample": 0.9,
+    "colsample_bytree": 0.5,
+    "reg_lambda": 1.0,
+    "gamma": 0.5,
+    "n_estimators": 19
+  },
+  "training_window": [
+    "2014-01-31",
+    "2016-12-30"
+  ],
+  "test_window": [
+    "2017-01-03",
+    "2017-12-29"
+  ],
+  "validation_metrics": {
+    "MAE": 0.8778586636612741,
+    "RMSE": 1.2801746840362886,
+    "R2": 0.9544588634204444,
+    "MAPE_pct": 0.8069050956900874,
+    "R2_of_returns": 0.005497338011631658,
+    "direction_accuracy_pct": 55.90551181102362
+  },
+  "test_metrics": {
+    "MAE": 1.1779900835852228,
+    "RMSE": 1.7541737061101246,
+    "R2": 0.9855658321150806,
+    "MAPE_pct": 0.7704844111429289,
+    "R2_of_returns": -0.016499448206353184,
+    "direction_accuracy_pct": 53.78486055776892
+  },
+  "naive_baseline_test_metrics": {
+    "MAE": 1.1857370517928292,
+    "RMSE": 1.7521491072462712,
+    "R2": 0.9855991315945388,
+    "MAPE_pct": 0.7762980221508707,
+    "R2_of_returns": -0.018837032419525945
+  },
+  "beats_naive_on_test_rmse": false,
+  "price_range_train_val": [
+    71.5142,
+    133.0
+  ],
+  "created_utc": "2026-11-23T05:55:47+00:00",
+  "libraries": {
+    "python": "3.12.3",
+    "xgboost": "3.4.1",
+    "mlflow": "3.18.0",
+    "pandas": "3.0.6"
+  },
+  "mlflow_run_id": "4fa25078f0524d9aa21efc807a7aa8ec",
+  "mlflow_experiment": "aapl-next-day-close",
+  "disclaimer": "Historical statistical model for education. Not investment advice; historical patterns do not guarantee future prices."
+}

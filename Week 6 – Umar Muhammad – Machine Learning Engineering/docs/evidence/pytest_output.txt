@@ -1,0 +1,36 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /usr/bin/python3
+rootdir: /mnt/user-data/outputs/ml-week6
+plugins: platformdirs-4.13.0, anyio-4.16.0
+collecting ... collected 29 items
+tests/test_api.py::test_health PASSED                                    [  3%]
+tests/test_api.py::test_model_info PASSED                                [  6%]
+tests/test_api.py::test_valid_prediction_structure_and_sanity PASSED     [ 10%]
+tests/test_api.py::test_lowercase_symbol_is_accepted PASSED              [ 13%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[wrong symbol-<lambda>] PASSED [ 17%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[19 days only-<lambda>] PASSED [ 20%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[21 days-<lambda>] PASSED [ 24%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[negative price-<lambda>] PASSED [ 27%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[zero price-<lambda>] PASSED [ 31%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[high below low-<lambda>] PASSED [ 34%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[close above high-<lambda>] PASSED [ 37%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[negative volume-<lambda>] PASSED [ 41%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[zero volume-<lambda>] PASSED [ 44%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[text price-<lambda>] PASSED [ 48%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[dates out of order-<lambda>] PASSED [ 51%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[duplicate date-<lambda>] PASSED [ 55%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[bad date-<lambda>] PASSED [ 58%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[missing field-<lambda>] PASSED [ 62%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[missing history-<lambda>] PASSED [ 65%]
+tests/test_api.py::test_invalid_input_returns_422_and_no_prediction[missing symbol-<lambda>] PASSED [ 68%]
+tests/test_api.py::test_extreme_price_range_adds_warning PASSED          [ 72%]
+tests/test_api.py::test_large_daily_move_adds_warning PASSED             [ 75%]
+tests/test_features.py::test_audit_reproduces_the_assignments_data_quality_statements PASSED [ 79%]
+tests/test_features.py::test_stock_is_chronological_and_complete PASSED  [ 82%]
+tests/test_features.py::test_features_do_not_use_future_information PASSED [ 86%]
+tests/test_features.py::test_day_t_does_not_influence_its_own_features PASSED [ 89%]
+tests/test_features.py::test_previous_day_features_are_really_the_previous_day PASSED [ 93%]
+tests/test_features.py::test_api_features_match_training_features PASSED [ 96%]
+tests/test_features.py::test_training_table_has_no_missing_values PASSED [100%]
+=============================== warnings summary ===============================
+======================== 29 passed, 1 warning in 4.58s =========================
